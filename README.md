@@ -3,7 +3,7 @@ Steps to perform BEFORE attending the tutorial session
 
 0. Clone this repo:
 ```
-git clone blablabla
+git clone git@github.com:dukebody/recipes-drf-pycones19.git
 ```
 
 1. Create a virtual environment for Python 3 and activate it.
