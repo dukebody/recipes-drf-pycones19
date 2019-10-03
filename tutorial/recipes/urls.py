@@ -2,6 +2,6 @@ from django.urls import path
 from tutorial.recipes import views
 
 urlpatterns = [
-    path('recipes/', views.recipe_list),
-    path('recipes/<int:pk>/', views.recipes_detail),
+    path('recipes/', views.RecipeList.as_view()),
+    path('recipes/<int:pk>/', views.RecipeDetail.as_view()),
 ]
