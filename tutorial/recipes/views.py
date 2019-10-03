@@ -12,3 +12,12 @@ def recipes_detail(request, pk):
 
     serializer = RecipeSerializer(recipe)
     return JsonResponse(serializer.data)
+
+
+def recipe_list(request):
+    """
+    List all recipes.
+    """
+    recipes = Recipe.objects.all()
+    serializer = RecipeSerializer(recipes, many=True)
+    return JsonResponse(serializer.data, safe=False)
