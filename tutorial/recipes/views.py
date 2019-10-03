@@ -5,14 +5,28 @@ from tutorial.recipes.models import Recipe
 from tutorial.recipes.serializers import RecipeSerializer
 
 
+@csrf_exempt
 def recipes_detail(request, pk):
     try:
         recipe = Recipe.objects.get(pk=pk)
     except Recipe.DoesNotExist:
         return HttpResponse(status=404)
 
-    serializer = RecipeSerializer(recipe)
-    return JsonResponse(serializer.data)
+    if request.method == 'GET':
+        serializer = RecipeSerializer(recipe)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = RecipeSerializer(recipe, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        recipe.delete()
+        return HttpResponse(status=204)
 
 
 @csrf_exempt  # bypass csrf checks on POST
