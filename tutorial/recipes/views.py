@@ -1,17 +1,11 @@
 from tutorial.recipes.models import Recipe
 from tutorial.recipes.serializers import RecipeSerializer
-from rest_framework import generics
+from rest_framework import viewsets
 
 
-class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-
-
-class RecipeList(generics.ListCreateAPIView):
+class RecipeViewSet(viewsets.ModelViewSet):
     """
-    List all recipes or create new ones.
+    This viewset automatically provides CRUD actions.
     """
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    
